@@ -1,0 +1,619 @@
+:root {
+  --clr-black: #222;
+  --clr-white: #fff;
+  --clr-primary-1: hsl(205, 86%, 17%);
+  --clr-primary-2: hsl(205, 77%, 27%);
+  --clr-primary-3: hsl(205, 72%, 37%);
+  --clr-primary-4: hsl(205, 63%, 48%);
+  --clr-primary-5: hsl(205, 78%, 60%);
+  /* darkest grey - used for headings */
+  --clr-grey-1: hsl(209, 61%, 16%);
+  --clr-grey-2: hsl(211, 39%, 23%);
+  --clr-grey-3: hsl(209, 34%, 30%);
+  --clr-grey-4: hsl(209, 28%, 39%);
+  /* grey used for paragraphs */
+  --clr-grey-5: hsl(210, 22%, 49%);
+  --transition: all 0.3s linear;
+  --spacing: 0.1rem;
+  --radius: 0.25rem;
+  --light-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  --dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+  --max-width: 1170px;
+  --fixed-width: 450px;
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+@import url("~leaflet/dist/leaflet.css");
+* {
+  box-sizing: border-box;
+}
+body {
+  color: hsl(205, 86%, 17%);
+  background-color: hsl(210, 36%, 96%);
+}
+.leaflet-container {
+  width: 100%;
+  height: 100vh;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+h4 {
+  font-size: 2.25rem;
+  color: var(--clr-primary-2);
+}
+
+.mapcontainer {
+  border-radius: 10px;
+  box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Home page components styling*/
+.grid-container {
+  max-width: 1480px;
+  margin: 8rem auto;
+  display: grid;
+  align-items: center;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  column-gap: 1rem;
+  grid-row-gap: 0rem;
+}
+
+/* Map */
+#grid-item5 {
+  border-radius: 10px;
+  grid-column: 1 / span 3;
+  grid-row: 3 / span 4;
+  width: auto;
+  display: flex;
+  align-items: center;
+  margin: 0 5rem;
+  margin-right: 7rem;
+  margin-bottom: 0;
+}
+/*Raw*/
+#grid-item2 {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.3);
+  text-transform: capitalize;
+  align-items: center;
+  font-size: 2rem;
+  padding-bottom: 5rem;
+  grid-row: 1;
+  grid-column: 3;
+  height: auto;
+  margin-right: 7rem;
+}
+#grid-item2 td,
+#grid-item2 tr {
+  font-weight: 300;
+  padding: 0.25rem;
+  border: none;
+}
+#grid-item td:nth-child(odd) {
+  color: red;
+}
+/*rssiSnr*/
+#grid-item1 {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.3);
+  display: flex;
+  text-transform: capitalize;
+  flex-direction: column-reverse;
+  align-items: center;
+  font-size: 1.5rem;
+  margin-left: 5rem;
+  padding: 0 1.25rem;
+  padding-bottom: 1rem;
+  grid-row: 1;
+  grid-column: 1 / span 2;
+  height: auto;
+}
+/*turbidity*/
+#grid-item4 {
+  display: flex;
+  flex-direction: column-reverse;
+  align-content: center;
+  justify-content: center;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.3);
+  display: flex;
+  text-transform: capitalize;
+  flex-direction: column-reverse;
+  align-items: center;
+  font-size: 1.5rem;
+  height: auto;
+  margin-right: 7rem;
+  padding-bottom: 2rem;
+  grid-column: 3;
+  grid-row: 2;
+}
+/*temperatrue*/
+#grid-item3 {
+  display: flex;
+  text-transform: capitalize;
+  flex-direction: column-reverse;
+  align-items: center;
+  align-self: center;
+  font-size: 1.5rem;
+  margin-left: 5rem;
+  padding: 1rem 1rem;
+  justify-content: center;
+  background-color: white;
+  border-radius: 10px;
+  grid-row: 2;
+  grid-column: 1 / span 2;
+  box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.3);
+}
+@media screen and (max-width: 360px) and (max-width: 480px) {
+  .container {
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    column-gap: 0rem;
+    grid-row-gap: 0rem;
+  }
+  #grid-item1 {
+    grid-column: 1;
+    grid-row: 3;
+    margin: 0rem 1rem;
+    margin-bottom: 3rem;
+    font-size: 1.5rem;
+  }
+  #grid-item2 {
+    grid-column: 1;
+    grid-row: 1;
+    margin: 0rem 1rem;
+    margin-bottom: 3rem;
+    font-size: 2rem;
+  }
+  #grid-item3 {
+    grid-column: 1;
+    grid-row: 4;
+    margin: 0rem 1rem;
+    margin-bottom: 3rem;
+    font-size: 1.5rem;
+  }
+  #grid-item4 {
+    grid-column: 1;
+    grid-row: 2;
+    margin: 0rem 1rem;
+    margin-bottom: 3rem;
+    font-size: 1.5rem;
+  }
+  #grid-item5 {
+    grid-column: 1;
+    grid-row: 5;
+    margin: 0rem 1rem;
+    margin-bottom: 3rem;
+    font-size: 1.5rem;
+  }
+}
+/* END OF GRID SETTING*/
+.btnRssi {
+  margin-top: 0.25rem;
+}
+
+.component {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  flex-direction: column-reverse;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.3);
+  text-transform: capitalize;
+  align-items: center;
+  font-size: 1.5vw;
+  padding: 2rem 1.5rem;
+  padding-bottom: 1.25rem;
+  width: 90%;
+  height: 580px;
+  min-width: 360px;
+  margin: 7.5rem auto;
+  margin-bottom: 1rem;
+}
+/* History Component */
+.history {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  flex-direction: column-reverse;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.3);
+  text-transform: capitalize;
+  align-items: center;
+  font-size: 1.2vw;
+  width: 75%;
+  min-width: 360px;
+  margin: 6.5rem auto;
+  padding: 4rem 0rem;
+  overflow-x: auto;
+}
+.history table,
+.history tr,
+.history th,
+.history td {
+  text-align: center;
+  border: 1px solid var(--clr-grey-5);
+  border-collapse: collapse;
+}
+.history th,
+td {
+  text-transform: capitalize;
+  padding: 0.25rem 1.5rem;
+}
+
+.history th {
+  color: var(--clr-white);
+  font-weight: 400;
+  background-color: var(--clr-grey-3);
+}
+
+.history .historyOptions {
+  width: 100%;
+  background-color: red;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: flex-end;
+  align-self: flex-end;
+  margin: 0 0.5rem;
+  margin-bottom: 0.75rem;
+}
+.historyOptions button {
+  margin-left: 2rem;
+}
+.historyOptions form {
+  margin: 0rem;
+  padding: 0;
+}
+.historyOptions input {
+  align-self: flex-end;
+  width: 60%;
+  font-size: 1vw;
+  border: 1px solid var(--clr-primary-1);
+  border-radius: var(--radius);
+  padding: 0.25rem 1rem;
+}
+.history input:focus {
+  outline: 1px solid var(--clr-primary-5);
+}
+/* Responsivenes of the form  */
+@media screen and (max-width: 768px) {
+  /* styles for screens up to 768px wide */
+  .history form,
+  .history .button {
+    margin: 0 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .history input {
+    font-size: 1.5vw;
+    padding: 0.2rem 0.5rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  /* styles for screens up to 480px wide */
+  .history form,
+  .history table {
+    display: none;
+  }
+  .history .button {
+    margin: 0 auto;
+    margin-bottom: 0.25rem;
+  }
+
+  .history input {
+    font-size: 1vh;
+    padding: 0.15rem 0.25rem;
+  }
+}
+button {
+  margin: 0 1rem;
+  font-size: 1.2rem;
+  background-color: white;
+  border: none;
+}
+#scrollbtn {
+  position: fixed;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 9999px;
+  bottom: 1.5rem;
+  right: 0;
+  padding: 0;
+  margin-right: 2rem;
+}
+button:hover {
+  color: hsl(204, 86%, 17%);
+  font-weight: 499;
+}
+.component button {
+  background-color: transparent;
+  margin: 0 1rem;
+  margin-bottom: 0.75rem;
+}
+.component-map {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  flex-direction: column-reverse;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.3);
+  text-transform: capitalize;
+  align-items: center;
+  font-size: 1.5vw;
+  width: 99.5%;
+  height: 91vh;
+  min-width: 380px;
+  margin: 5.4rem auto;
+  margin-bottom: 1rem;
+}
+.navbar {
+  display: flex;
+}
+.navbar ul {
+  display: flex;
+  flex-direction: row;
+  padding: 1rem;
+  list-style: none;
+}
+ul li {
+  margin: 1rem;
+  color: red;
+  text-transform: capitalize;
+  text-decoration: none;
+}
+@media screen and (max-width: 600px) {
+  .component,
+  .component-map {
+    height: 480px;
+    padding: 0rem 0.025rem;
+    margin-top: 18vh;
+    font-size: 1rem;
+  }
+  .component button {
+    padding: 0 1rem;
+    margin: 0;
+  }
+}
+
+.links {
+  color: var(--clr-grey-1);
+  text-decoration: none;
+  text-transform: capitalize;
+}
+@media screen and (max-width: 600px) {
+  #logo {
+    display: none;
+    color: red;
+  }
+}
+/* Logging Form */
+.form {
+  display: flex;
+  margin: 10rem auto;
+  margin-bottom: 2rem;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 25%;
+  height: 250px;
+  padding: 1rem 2rem;
+  border-radius: 20px;
+  background-color: white;
+}
+
+/* inputs inside the form */
+.itemForm {
+  margin-bottom: 2rem;
+}
+
+#buttonForm,
+.button {
+  display: inline-block;
+  background: var(--clr-primary-2);
+  color: var(--clr-white);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius);
+  border-color: transparent;
+  text-transform: capitalize;
+  font-size: 1rem;
+  letter-spacing: var(--spacing);
+  margin-top: 2rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+#buttonForm:hover,
+.button:hover {
+  background: var(--clr-primary-1);
+  color: var(--clr-primary-5);
+}
+.important {
+  font-weight: 300;
+  color: rgb(192, 0, 0);
+}
+
+#success,
+#error,
+#connecting,
+#length {
+  display: flex;
+  width: 22%;
+  margin: auto;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-transform: capitalize;
+  background-color: white;
+}
+#success {
+  color: #279300;
+}
+
+#error {
+  color: #d10000;
+}
+
+#connecting {
+  color: var(--clr-grey-1);
+}
+
+#length {
+  color: #d10000;
+  font-size: 1rem;
+  font-weight: 400;
+}
+@media screen and (max-width: 600px) {
+  .form {
+    width: 80%;
+  }
+  #success,
+  #error,
+  #connecting,
+  #length {
+    display: flex;
+    width: 80%;
+    margin: auto;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    justify-content: center;
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-transform: capitalize;
+    background-color: white;
+  }
+
+  .itemForm {
+    margin-bottom: 2rem;
+  }
+}
+.switch {
+  width: 10%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-arround;
+  margin-top: 1.5rem;
+  margin-right: 5rem;
+  color: var(--clr-primary-1);
+}
+.switch svg {
+  cursor: pointer;
+}
+.nodevice {
+  width: 50%;
+  margin: 18rem auto;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-transform: capitalize;
+  padding: 1.5rem 2.5rem;
+  box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+.nodevice h2 {
+  font-size: 2rem;
+}
+.nodevice svg {
+  font-size: 3rem;
+  color: rgb(255, 99, 132);
+}
+.devices {
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.3);
+  text-transform: capitalize;
+  align-items: center;
+  font-size: 1.2vw;
+  width: 60%;
+  min-width: 360px;
+  margin: 6.5rem auto;
+  padding: 2rem 0rem;
+  overflow-x: auto;
+}
+.devices table {
+  width: 90%;
+}
+.devices table,
+.devices tr,
+.devices th,
+.devices td {
+  text-align: center;
+  border: 1px solid var(--clr-grey-5);
+  border-collapse: collapse;
+}
+.devices th {
+  color: var(--clr-white);
+  font-weight: 400;
+  background-color: var(--clr-grey-3);
+  text-transform: capitalize;
+  padding: 0.25rem 1rem;
+}
+
+.devices td {
+  padding: 0.5rem 2rem;
+}
+.devicesBtn {
+  cursor: pointer;
+}
+.devicesBtn:hover {
+  color: red;
+  font-size: 1.1rem;
+}
+/* @media screen and (max-width: 1080px) {
+  .form {
+    width: 45%;
+  }
+  #success,
+  #error,
+  #connecting,
+  #length {
+    display: flex;
+    width: 80%;
+    margin: auto;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    justify-content: center;
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-transform: capitalize;
+    background-color: white;
+  }
+
+  .itemForm {
+    margin-bottom: 2rem;
+  }
+} */

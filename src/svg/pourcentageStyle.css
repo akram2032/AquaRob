@@ -1,0 +1,53 @@
+.PercentageCircle {
+  width: 400px;
+  height: 250px;
+  display: block;
+}
+
+.PercentageCircle-trail {
+  fill: none;
+  stroke: #eee;
+}
+
+.PercentageCircle-circle {
+  fill: none;
+  stroke: rgb(53, 162, 235);
+  stroke-linecap: round;
+  animation: fill 1s ease-out forwards;
+}
+.PercentageCircle-circle-red {
+  fill: none;
+  stroke: rgb(255, 99, 132);
+  stroke-linecap: round;
+  animation: fill 1s ease-out forwards;
+}
+.PercentageCircle-text {
+  font-size: 22px;
+  fill: rgb(53, 162, 235);
+  dominant-baseline: middle;
+  text-anchor: middle;
+  font-weight: bold;
+}
+.PercentageCircle-text-red {
+  font-size: 22px;
+  fill: rgb(255, 99, 132);
+  dominant-baseline: middle;
+  text-anchor: middle;
+  font-weight: bold;
+}
+.PercentageCircle-text-gray {
+  font-size: 12px;
+  fill: rgb(53, 162, 235);
+  dominant-baseline: middle;
+  text-anchor: middle;
+  font-weight: bold;
+}
+/*@keyframes fill {
+  from {
+    stroke-dashoffset: 251.32; /* (radius * Math.PI * 2) - (100% * radius * Math.PI * 2) / 100 */
+  /*}
+  to {
+    stroke-dashoffset: ${({ dashOffset }) =>
+      dashOffset || 0};
+  }*/
+/*}*/
