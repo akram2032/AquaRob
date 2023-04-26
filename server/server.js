@@ -19,28 +19,24 @@ app.get("/api/fetchTemp/:id/:deviceID", (req, res) => {
   switch (id) {
     case "1":
       // get the temp of the current day by interval of 1 hour
-      sql =
-        "SELECT device_Id, HOUR(time) as hour, AVG(temperature) as temperature FROM aquaRob2 WHERE date = DATE(now()) GROUP BY HOUR(time);";
+      sql = `SELECT device_Id, HOUR(time) as hour, AVG(temperature) as temperature FROM aquaRob2 WHERE date = DATE(now()) and device_id = ${deviceID} GROUP BY HOUR(time);`;
       var temperature = new Array(24).fill(0);
       var indice = "hour";
       break;
     case "2":
       // get the avg temp on each day of the current week
-      sql =
-        "SELECT device_Id, DAYOFWEEK(date) AS day, AVG(temperature) AS temperature FROM aquaRob2 WHERE YEARWEEK(date) = YEARWEEK(NOW()) GROUP BY DAYOFWEEK(date) ORDER BY DAYOFWEEK(date);";
+      sql = `SELECT device_Id, DAYOFWEEK(date) AS day, AVG(temperature) AS temperature FROM aquaRob2 WHERE YEARWEEK(date) = YEARWEEK(NOW()) and device_id = ${deviceID} GROUP BY DAYOFWEEK(date) ORDER BY DAYOFWEEK(date);`;
       var temperature = new Array(7).fill(0);
       var indice = "day";
       break;
     case "3":
-      sql =
-        "SELECT device_Id, FLOOR((DAY(date) - 1) / 7) + 1 as week_number,  AVG(temperature) as temperature FROM aquaRob2 WHERE MONTH(date) = MONTH(CURDATE()) GROUP BY  week_number HAVING week_number BETWEEN 1 AND 4";
+      sql = `SELECT device_Id, FLOOR((DAY(date) - 1) / 7) + 1 as week_number,  AVG(temperature) as temperature FROM aquaRob2 WHERE MONTH(date) = MONTH(CURDATE()) and device_id = ${deviceID} GROUP BY  week_number HAVING week_number BETWEEN 1 AND 4`;
       var temperature = new Array(4).fill(0);
       var indice = "week_number";
       break;
     // year case
     case "4":
-      sql =
-        "SELECT device_Id, DATE_FORMAT(date, '%m') as month, AVG(temperature) as temperature FROM aquaRob2 WHERE YEAR(date) = YEAR(CURDATE()) GROUP BY month";
+      sql = `SELECT device_Id, DATE_FORMAT(date, '%m') as month, AVG(temperature) as temperature FROM aquaRob2 WHERE YEAR(date) = YEAR(CURDATE()) and device_id = ${deviceID} GROUP BY month`;
       var temperature = new Array(12).fill(0);
       var indice = "month";
       break;
@@ -102,28 +98,24 @@ app.get("/api/fetchRssi/:id/:deviceID", (req, res) => {
   switch (id) {
     case "1":
       // get the rssi of the current day by interval of 1 hour
-      sql =
-        "SELECT device_Id, HOUR(time) as hour, AVG(rssi) as rssi FROM aquaRob2 WHERE date = DATE(now()) GROUP BY HOUR(time)";
+      sql = `SELECT device_id, HOUR(time) as hour, AVG(rssi) as rssi FROM aquaRob2 WHERE date = DATE(now()) and device_id = ${deviceID} GROUP BY HOUR(time)`;
       var rssi = new Array(24).fill(0);
       var indice = "hour";
       break;
     case "2":
       // get the avg rssi on each day of the current week
-      sql =
-        "SELECT device_Id, DAYOFWEEK(date) AS day, AVG(rssi) AS rssi FROM aquaRob2 WHERE YEARWEEK(date) = YEARWEEK(NOW()) GROUP BY DAYOFWEEK(date) ORDER BY DAYOFWEEK(date);";
+      sql = `SELECT device_id, DAYOFWEEK(date) AS day, AVG(rssi) AS rssi FROM aquaRob2 WHERE YEARWEEK(date) = YEARWEEK(NOW()) and device_id = ${deviceID} GROUP BY DAYOFWEEK(date) ORDER BY DAYOFWEEK(date);`;
       var rssi = new Array(7).fill(0);
       var indice = "day";
       break;
     case "3":
-      sql =
-        "SELECT device_Id, FLOOR((DAY(date) - 1) / 7) + 1 as week_number,  AVG(rssi) as rssi FROM aquaRob2 WHERE MONTH(date) = MONTH(CURDATE()) GROUP BY  week_number HAVING week_number BETWEEN 1 AND 4";
+      sql = `SELECT device_id, FLOOR((DAY(date) - 1) / 7) + 1 as week_number,  AVG(rssi) as rssi FROM aquaRob2 WHERE MONTH(date) = MONTH(CURDATE()) and device_id = ${deviceID} GROUP BY  week_number HAVING week_number BETWEEN 1 AND 4`;
       var rssi = new Array(4).fill(0);
       var indice = "week_number";
       break;
     // year case
     case "4":
-      sql =
-        "SELECT device_Id, DATE_FORMAT(date, '%m') as month, AVG(rssi) as rssi FROM aquaRob2 WHERE YEAR(date) = YEAR(CURDATE()) GROUP BY month";
+      sql = `SELECT device_id, DATE_FORMAT(date, '%m') as month, AVG(rssi) as rssi FROM aquaRob2 WHERE YEAR(date) = YEAR(CURDATE()) and device_id = ${deviceID} GROUP BY month`;
       var rssi = new Array(12).fill(0);
       var indice = "month";
       break;
@@ -141,37 +133,37 @@ app.get("/api/fetchRssi/:id/:deviceID", (req, res) => {
     if (data) {
       data.forEach((obj) => {
         if (obj[indice][0] == "0") {
-          rssi[obj[indice][1]] = obj.rssi + `x${obj.device_Id}`;
+          rssi[obj[indice][1]] = obj.rssi; //+ `x${obj.device_Id}`;
         }
-        rssi[obj[indice]] = obj.rssi + `x${obj.device_Id}`;
+        rssi[obj[indice]] = obj.rssi; //+ `x${obj.device_Id}`;
       });
       // filter by divice id
-      const filteredArray = rssi
-        .filter((item) => {
-          if (typeof item === "string") {
-            const parts = item.split("x");
-            if (parts.length === 2 && parts[1] === deviceID) {
-              return !isNaN(parts[0]);
-            } else {
-              return false;
-            }
-          }
-          return item === 0;
-        })
-        .map((item) => {
-          if (typeof item === "string") {
-            const number = parseFloat(item.split("x")[0]);
-            return !isNaN(number) ? number : 0;
-          } else {
-            return item;
-          }
-        });
+      // const filteredArray = rssi
+      //   .filter((item) => {
+      //     if (typeof item === "string") {
+      //       const parts = item.split("x");
+      //       if (parts.length === 2 && parts[1] === deviceID) {
+      //         return !isNaN(parts[0]);
+      //       } else {
+      //         return false;
+      //       }
+      //     }
+      //     return item === 0;
+      //   })
+      //   .map((item) => {
+      //     if (typeof item === "string") {
+      //       const number = parseFloat(item.split("x")[0]);
+      //       return !isNaN(number) ? number : 0;
+      //     } else {
+      //       return item;
+      //     }
+      //   });
       if (id === "2")
         return res.status(200).json({
           success: true,
-          data: filteredArray.slice(1).concat(filteredArray[0]),
+          data: rssi.slice(1).concat(rssi[0]),
         });
-      else return res.status(200).json({ success: true, data: filteredArray });
+      else return res.status(200).json({ success: true, data: rssi });
     } else res.status(404).send("not found");
   };
   fetch();
@@ -182,28 +174,24 @@ app.get("/api/fetchSnr/:id/:deviceID", (req, res) => {
   switch (id) {
     case "1":
       // get the snr of the current day by interval of 1 hour
-      sql =
-        "SELECT device_Id, HOUR(time) as hour, AVG(snr) as snr FROM aquaRob2 WHERE date = DATE(now()) GROUP BY HOUR(time)";
+      sql = `SELECT device_id, HOUR(time) as hour, AVG(snr) as snr FROM aquaRob2 WHERE date = DATE(now()) and device_id = ${deviceID} GROUP BY HOUR(time)`;
       var snr = new Array(24).fill(0);
       var indice = "hour";
       break;
     case "2":
       // get the avg snr on each day of the current week
-      sql =
-        "SELECT device_Id, DAYOFWEEK(date) AS day, AVG(snr) AS snr FROM aquaRob2 WHERE YEARWEEK(date) = YEARWEEK(NOW()) GROUP BY DAYOFWEEK(date) ORDER BY DAYOFWEEK(date);";
+      sql = `SELECT device_id, DAYOFWEEK(date) AS day, AVG(snr) AS snr FROM aquaRob2 WHERE YEARWEEK(date) = YEARWEEK(NOW()) and device_id = ${deviceID} GROUP BY DAYOFWEEK(date) ORDER BY DAYOFWEEK(date);`;
       var snr = new Array(7).fill(0);
       var indice = "day";
       break;
     case "3":
-      sql =
-        "SELECT device_Id, FLOOR((DAY(date) - 1) / 7) + 1 as week_number,  AVG(snr) as snr FROM aquaRob2 WHERE MONTH(date) = MONTH(CURDATE()) GROUP BY  week_number HAVING week_number BETWEEN 1 AND 4";
+      sql = `SELECT device_id, FLOOR((DAY(date) - 1) / 7) + 1 as week_number,  AVG(snr) as snr FROM aquaRob2 WHERE MONTH(date) = MONTH(CURDATE()) and device_id = ${deviceID}  GROUP BY  week_number HAVING week_number BETWEEN 1 AND 4`;
       var snr = new Array(4).fill(0);
       var indice = "week_number";
       break;
     // year case
     case "4":
-      sql =
-        "SELECT device_Id, DATE_FORMAT(date, '%m') as month, AVG(snr) as snr FROM aquaRob2 WHERE YEAR(date) = YEAR(CURDATE()) GROUP BY month";
+      sql = `SELECT device_id, DATE_FORMAT(date, '%m') as month, AVG(snr) as snr FROM aquaRob2 WHERE YEAR(date) = YEAR(CURDATE()) and device_id = ${deviceID} GROUP BY month`;
       var snr = new Array(12).fill(0);
       var indice = "month";
       break;
@@ -221,38 +209,38 @@ app.get("/api/fetchSnr/:id/:deviceID", (req, res) => {
     if (data) {
       data.forEach((obj) => {
         if (obj[indice][0] == "0") {
-          snr[obj[indice][1]] = obj.snr + `x${obj.device_Id}`;
+          snr[obj[indice][1]] = obj.snr; //+ `x${obj.device_id}`;
         }
-        snr[obj[indice]] = obj.snr + `x${obj.device_Id}`;
+        snr[obj[indice]] = obj.snr; //+ `x${obj.device_id}`;
       });
       // filter by divice id
-      const filteredArray = snr
-        .filter((item) => {
-          if (typeof item === "string") {
-            const parts = item.split("x");
-            if (parts.length === 2 && parts[1] === deviceID) {
-              return !isNaN(parts[0]);
-            } else {
-              return false;
-            }
-          }
-          return item === 0;
-        })
-        .map((item) => {
-          if (typeof item === "string") {
-            const number = parseFloat(item.split("x")[0]);
-            return !isNaN(number) ? number : 0;
-          } else {
-            return item;
-          }
-        });
+      // const filteredArray = snr
+      //   .filter((item) => {
+      //     if (typeof item === "string") {
+      //       const parts = item.split("x");
+      //       if (parts.length === 2 && parts[1] === deviceID) {
+      //         return !isNaN(parts[0]);
+      //       } else {
+      //         return false;
+      //       }
+      //     }
+      //     return item === 0;
+      //   })
+      //   .map((item) => {
+      //     if (typeof item === "string") {
+      //       const number = parseFloat(item.split("x")[0]);
+      //       return !isNaN(number) ? number : 0;
+      //     } else {
+      //       return item;
+      //     }
+      //   });
 
       if (id === "2")
         return res.status(200).json({
           success: true,
-          data: filteredArray.slice(1).concat(filteredArray[0]),
+          data: snr.slice(1).concat(snr[0]),
         });
-      else return res.status(200).json({ success: true, data: filteredArray });
+      else return res.status(200).json({ success: true, data: snr });
     } else res.status(404).send("not found");
   };
   fetch();

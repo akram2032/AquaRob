@@ -74,7 +74,7 @@ function App() {
 
                   <div id="grid-item4">
                     <Trubidite indice={indice} />
-                    <h4>Turbidite</h4>
+                    <h4>Turbidity</h4>
                   </div>
                 </div>
                 <ScrollBtn />
