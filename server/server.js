@@ -54,39 +54,38 @@ app.get("/api/fetchTemp/:id/:deviceID", (req, res) => {
     if (data) {
       data.forEach((obj) => {
         if (obj[indice][0] == "0") {
-          temperature[obj[indice][1]] = obj.temperature + `x${obj.device_Id}`;
+          temperature[obj[indice][1]] = obj.temperature; //+ `x${obj.device_Id}`;
         }
-        temperature[obj[indice]] = obj.temperature + `x${obj.device_Id}`;
+        temperature[obj[indice]] = obj.temperature; //+ `x${obj.device_Id}`;
       });
       // filter by divice id
-      const filteredArray = temperature
-        .filter((item) => {
-          if (typeof item === "string") {
-            const parts = item.split("x");
-            if (parts.length === 2 && parts[1] === deviceID) {
-              return !isNaN(parts[0]);
-            } else {
-              return false;
-            }
-          }
-          return item === 0;
-        })
-        .map((item) => {
-          if (typeof item === "string") {
-            const number = parseFloat(item.split("x")[0]);
-            return !isNaN(number) ? number : 0;
-          } else {
-            return item;
-          }
-        });
+      // const filteredArray = temperature
+      //   .filter((item) => {
+      //     if (typeof item === "string") {
+      //       const parts = item.split("x");
+      //       if (parts.length === 2 && parts[1] === deviceID) {
+      //         return !isNaN(parts[0]);
+      //       } else {
+      //         return false;
+      //       }
+      //     }
+      //     return item === 0;
+      //   })
+      //   .map((item) => {
+      //     if (typeof item === "string") {
+      //       const number = parseFloat(item.split("x")[0]);
+      //       return !isNaN(number) ? number : 0;
+      //     } else {
+      //       return item;
+      //     }
+      //   });
 
       if (id === "2") {
         return res.status(200).json({
           success: true,
-          data: filteredArray.slice(1).concat(filteredArray[0]),
+          data: temperature.slice(1).concat(temperature[0]),
         });
-      } else
-        return res.status(200).json({ success: true, data: filteredArray });
+      } else return res.status(200).json({ success: true, data: temperature });
     }
   };
   fetch();

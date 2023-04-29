@@ -30,6 +30,8 @@ function Chart({ indice }) {
   const [x, setX] = useState("1");
   const [dataTemp, setDataTemp] = useState();
   const [trigger, setTrigger] = useState(true);
+  const [firstClicked, setFirstClicked] = useState(true);
+  const [lastClicked, setLastClicked] = useState(null);
   // Fetch the data
   useEffect(() => {
     fetchData(x);
@@ -38,11 +40,21 @@ function Chart({ indice }) {
     fetchData(1);
     setTrigger(false);
   };
+  const classHandler = () => {
+    return firstClicked && "selectedBtn";
+  };
+  const handleClassBtn = (e) => {
+    setFirstClicked(false);
+    if (lastClicked != null) {
+      lastClicked.classList.remove("selectedBtn");
+    }
+    e.target.classList.add("selectedBtn");
+    setLastClicked(e.target);
+  };
   const fetchData = async (x) => {
     //const url = "http://localhost:8000/api/fetchTemp/" + x;
     const data = await fetch(`${API_URL}/api/fetchTemp/${x}/${indice}`);
     const dataJson = await data.json();
-    console.log(x);
     setDataTemp(dataJson.data);
   };
   if (trigger) {
@@ -198,16 +210,35 @@ function Chart({ indice }) {
   return (
     <>
       <div>
-        <button type="button" onClick={() => toggleView(4)}>
+        <button
+          className={classHandler()}
+          type="button"
+          onClick={(e) => {
+            handleClassBtn(e);
+            toggleView(4);
+          }}
+        >
           Hours
         </button>
-        <button type="button" onClick={() => toggleView(1)}>
+        <button
+          type="button"
+          onClick={(e) => {
+            handleClassBtn(e);
+            toggleView(1);
+          }}
+        >
           Days
         </button>
-        <button type="button" onClick={() => toggleView(2)}>
+        {/* <button type="button" onClick={() => toggleView(2)}>
           Weeks
-        </button>
-        <button type="button" onClick={() => toggleView(3)}>
+        </button> */}
+        <button
+          type="button"
+          onClick={(e) => {
+            handleClassBtn(e);
+            toggleView(3);
+          }}
+        >
           Months
         </button>
       </div>

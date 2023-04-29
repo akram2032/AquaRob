@@ -52,7 +52,7 @@ const Map = ({ indice }) => {
 let DefaultIcon = L.icon({
   iconUrl: "./iconss.png",
   //iconSize: [20, 41],
-  iconSize: [25, 55],
+  iconSize: [18, 36],
 });
 L.Marker.prototype.options.icon = DefaultIcon;
 export default Map;

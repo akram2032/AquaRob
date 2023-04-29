@@ -49,7 +49,7 @@ export const options = {
   },
 };
 
-export default function Snr({indice}) {
+export default function Snr({ indice }) {
   const [showDay, setShowDay] = useState(true);
   const [showWeek, setShowWeek] = useState(false);
   const [showMonth, setShowMonth] = useState(false);
@@ -58,7 +58,8 @@ export default function Snr({indice}) {
   const [dataSnr, setDataSnr] = useState();
   const [dataRssi, setDataRssi] = useState();
   const [triger, setTrigger] = useState(true);
-
+  const [firstClicked, setFirstClicked] = useState(true);
+  const [lastClicked, setLastClicked] = useState(null);
   useEffect(() => {
     fetchData(x);
   }, [indice, x]);
@@ -68,6 +69,18 @@ export default function Snr({indice}) {
       fetchData(1);
       setTrigger(false);
     }
+  };
+
+  const classHandler = () => {
+    return firstClicked && "selectedBtn";
+  };
+  const handleClassBtn = (e) => {
+    setFirstClicked(false);
+    if (lastClicked != null) {
+      lastClicked.classList.remove("selectedBtn");
+    }
+    e.target.classList.add("selectedBtn");
+    setLastClicked(e.target);
   };
   const fetchData = async (x) => {
     const urlSnr = `${API_URL}/api/fetchSnr/${x}/${indice}`;
@@ -235,16 +248,35 @@ export default function Snr({indice}) {
   return (
     <>
       <div className="btnRssi">
-        <button type="button" onClick={() => toggle(4)}>
+        <button
+          className={classHandler()}
+          type="button"
+          onClick={(e) => {
+            handleClassBtn(e);
+            toggle(4);
+          }}
+        >
           Hours
         </button>
-        <button type="button" onClick={() => toggle(1)}>
+        <button
+          type="button"
+          onClick={(e) => {
+            handleClassBtn(e);
+            toggle(1);
+          }}
+        >
           Days
         </button>
-        <button type="button" onClick={() => toggle(2)}>
+        {/* <button type="button" onClick={() => toggle(2)}>
           Weeks
-        </button>
-        <button type="button" onClick={() => toggle(3)}>
+        </button> */}
+        <button
+          type="button"
+          onClick={(e) => {
+            handleClassBtn(e);
+            toggle(3);
+          }}
+        >
           Months
         </button>
       </div>

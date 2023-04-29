@@ -50,7 +50,7 @@ h2 {
   font-size: 1.5rem;
 }
 h4 {
-  font-size: 2.25rem;
+  font-size: 2rem;
   color: var(--clr-primary-2);
 }
 
@@ -94,12 +94,15 @@ h4 {
   box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.3);
   text-transform: capitalize;
   align-items: center;
-  font-size: 2rem;
-  padding-bottom: 5rem;
+  font-size: 1.75rem;
+  padding-bottom: 2rem;
   grid-row: 1;
   grid-column: 3;
   height: auto;
   margin-right: 7rem;
+}
+h4 {
+  margin-bottom: -0.01em;
 }
 #grid-item2 td,
 #grid-item2 tr {
@@ -149,6 +152,9 @@ h4 {
   padding-bottom: 2rem;
   grid-column: 3;
   grid-row: 2;
+}
+#grid-item4 > svg {
+  margin-top: 0.5rem;
 }
 /*temperatrue*/
 #grid-item3 {
@@ -245,12 +251,17 @@ h4 {
   box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.3);
   text-transform: capitalize;
   align-items: center;
-  font-size: 1.2vw;
-  width: 75%;
+  font-size: 1.2rem;
+  width: 95%;
   min-width: 360px;
   margin: 6.5rem auto;
   padding: 4rem 0rem;
   overflow-x: auto;
+}
+.historyOptions {
+  margin: 0 auto;
+  width: 95%;
+  font-size: 1.2rem;
 }
 .history table,
 .history tr,
@@ -274,17 +285,16 @@ td {
 
 .history .historyOptions {
   width: 100%;
-  background-color: red;
   display: flex;
   flex-direction: row-reverse;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: flex-end;
   align-self: flex-end;
-  margin: 0 0.5rem;
   margin-bottom: 0.75rem;
+  margin-left: 1rem;
 }
 .historyOptions button {
-  margin-left: 2rem;
+  margin-left: 1rem;
 }
 .historyOptions form {
   margin: 0rem;
@@ -292,11 +302,11 @@ td {
 }
 .historyOptions input {
   align-self: flex-end;
-  width: 60%;
-  font-size: 1vw;
-  border: 1px solid var(--clr-primary-1);
+  width: 75%;
+  font-size: 1rem;
+  border: 0px solid var(--clr-primary-1);
+  padding: 0.35rem 0.5rem;
   border-radius: var(--radius);
-  padding: 0.25rem 1rem;
 }
 .history input:focus {
   outline: 1px solid var(--clr-primary-5);
@@ -551,6 +561,7 @@ ul li {
 }
 .devices {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   border-radius: 10px;
   background-color: white;
@@ -587,33 +598,153 @@ ul li {
   padding: 0.5rem 2rem;
 }
 .devicesBtn {
+  padding: 1rem 2rem;
+  width: 50%;
+  font-weight: 600;
+  text-transform: capitalize;
   cursor: pointer;
 }
-.devicesBtn:hover {
-  color: red;
-  font-size: 1.1rem;
-}
-/* @media screen and (max-width: 1080px) {
-  .form {
-    width: 45%;
-  }
-  #success,
-  #error,
-  #connecting,
-  #length {
-    display: flex;
-    width: 80%;
-    margin: auto;
-    padding: 1rem 2rem;
-    border-radius: 10px;
-    justify-content: center;
-    font-size: 1.1rem;
-    font-weight: 500;
-    text-transform: capitalize;
-    background-color: white;
-  }
 
-  .itemForm {
-    margin-bottom: 2rem;
-  }
-} */
+/* div */
+.add_remove {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+}
+.add_remove > button {
+  transition: var(--transition);
+}
+.add {
+  color: white;
+  background-color: rgba(0, 196, 0, 0.75);
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: var(--radius);
+}
+.add:hover {
+  background-color: rgba(0, 196, 0);
+  color: white;
+}
+#remove {
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: var(--radius);
+  background-color: rgba(235, 0, 0, 0.8);
+}
+#remove:hover {
+  background-color: rgb(235, 0, 0);
+}
+.selectedBtn {
+  /* background-color: rgba(255, 0, 55, 0.5); */
+  color: red;
+}
+
+/* Device manager */
+
+.deviceManager > h4 {
+  text-transform: capitalize;
+  font-size: 1.75rem;
+  align-self: flex-start;
+  margin: 0.25 0;
+  margin-bottom: 1rem;
+}
+.deviceManager {
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.3);
+  align-items: center;
+  justify-content: center;
+  width: 30%;
+  margin: 6rem auto;
+  padding: 0.25rem 4rem;
+  padding-bottom: 1rem;
+  width: 50%;
+}
+.deviceManager > form {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  width: 100%;
+}
+
+.deviceManager > form > input {
+  font-size: 1rem;
+  margin: 0.25rem;
+  padding: 0.5rem 0.75rem;
+  width: 100%;
+  border-radius: 15px;
+  border: none;
+}
+
+.deviceManager > form > input:focus {
+  outline: none;
+}
+
+.deviceManager > form > .deviceBtnDiv > button {
+  margin-top: 0.5rem;
+  width: 50%;
+  padding: 0.5rem 0.75rem;
+  align-self: center;
+  transition: var(--transition);
+}
+
+.deviceManager > form > .deviceBtnDiv > button:hover {
+  color: white;
+}
+.deviceBtnDiv {
+  display: flex;
+  flex-direction: row-reverse;
+  width: 100%;
+}
+.cancel,
+#cancel {
+  background-color: rgba(77, 77, 77, 0.8);
+  color: white;
+}
+.cancel:hover,
+#cancel:hover {
+  background-color: rgb(77, 77, 77);
+  color: white;
+}
+
+.removeForm {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.removeForm > form {
+  width: 100%;
+  display: flex;
+}
+.removeForm > form > button {
+  width: 25%;
+  text-align: center;
+  display: flex;
+}
+.removeForm > form > input {
+  font-size: 1rem;
+}
+.removeForm > form > input:focus {
+  outline: none;
+}
+.removeBtns {
+  width: 100px;
+  border-radius: 10px;
+  border-radius: var(--radius);
+  transition: var(--transition);
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0;
+  margin-left: 1rem;
+  color: white;
+}
+
+.removeBtns:hover {
+  color: white;
+}

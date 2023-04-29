@@ -6,7 +6,7 @@ import { Avatar, Typography } from "@mui/material";
 import { useHistory } from "react-router-dom";
 import { Box } from "@mui/system";
 
-export default function Avatarbar({isDevice}) {
+export default function Avatarbar({ isDevice }) {
   const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -61,15 +61,13 @@ export default function Avatarbar({isDevice}) {
           >
             Change Password
           </MenuItem>
-          {isDevice &&
           <MenuItem
             onClick={() => {
               history.push("/devices");
             }}
           >
-            Add Devices 
+            Manage Devices
           </MenuItem>
-          }
         </div>
       </Menu>
     </div>

@@ -1,27 +1,32 @@
 import React, { useState, useEffect } from "react";
 import { API_URL } from "./config";
 
-const Raw = ({indice}) => {
+const Raw = ({ indice }) => {
   const [data, setData] = useState("");
   // x to set intervall once
-  const [x, setX] = useState(0)
+  const [x, setX] = useState(0);
   useEffect(() => {
     const fetch_ = async () => {
       const donnees = await fetch(`${API_URL}/api/fetchAll`);
       const json = await donnees.json();
       const { data } = json;
-      const filtredData = data.filter(obj=>obj.device_id === indice)
+      const filtredData = data.filter((obj) => obj.device_id === indice);
       setData(filtredData.pop());
     };
-    fetch_()
+    fetch_();
     if (x !== 0) {
-       setInterval(fetch_, 10000);
+      setInterval(fetch_, 10000);
     }
   }, [indice]);
   return (
     <div>
       <table>
         <tbody>
+          <tr>
+            <td>Device ID</td>
+            <td>{indice}</td>
+          </tr>
+
           <tr>
             <td>RSSI</td>
             <td>{data.rssi} DBm</td>

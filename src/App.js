@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Cookies from "js-cookie";
 import "./App.css";
 import Map from "./components/map";
 import Chart from "./components/chart";
@@ -10,30 +11,54 @@ import Bar from "./components/navbar";
 import Logging from "./components/logging";
 import ChangePass from "./components/cp";
 import History from "./components/history";
+import DeviceTable from "./components/addDevices";
 import ScrollBtn from "./components/Scrollbtn";
 import { API_URL } from "./components/config";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-const handleBar = () => {};
 function App() {
+  const [x, setX] = useState(0);
   const [sessionKey, setSessionKey] = useState(true);
   const [userPassword, setUserPassword] = useState("");
   const [indice, setIndice] = useState(1);
+  // total device that sent a message
   const [total, setTotal] = useState(1);
-
+  // array for all the data on the database
+  const [allData, setAllData] = useState();
+  // set for the ids of devices that sent a message
+  const [deviceIds, setDeviceIds] = useState(new Set([1]));
+  // array for all the registred devices on the database
+  const [devices, setDevices] = useState();
+  // expiration date for cookies
+  let expirationDate = new Date();
+  expirationDate.setDate(expirationDate.getDate() + 16);
   const handleChange = (x) => {
     setIndice(x);
   };
   useEffect(() => {
     const fetch_ = async () => {
       const response = await fetch(`${API_URL}/api/fetchAll`);
+      const device = await fetch(`${API_URL}/api/fetchDevices`);
+      const respDevice = await device.json();
+      const setDevice = await setDevices(respDevice.data);
       const json = await response.json();
       const { data } = json;
-      const deviceIds = new Set(data.map((item) => item.device_id));
-      setTotal(deviceIds.size);
+      const set = await setDeviceIds(
+        new Set(data.map((item) => item.device_id))
+      );
+      setAllData(data);
+      // setup a cookie that contains all the data
+      //Cookies.set("allData", data);
     };
     fetch_();
-  });
+  }, []);
+  useEffect(() => {
+    setTotal(deviceIds.size);
+    Cookies.set("devices", JSON.stringify(devices), {
+      expires: expirationDate,
+      sameSite: "Strict",
+    });
+  }, [deviceIds]);
   return (
     <>
       {(document.body.style.zoom = 1.0)}
@@ -56,24 +81,26 @@ function App() {
                 />
                 <div className="grid-container">
                   <div className="map1" id="grid-item5">
-                    <Map indice={indice} />
+                    <Map indice={Array.from(deviceIds)[indice - 1] || 1} />
                   </div>
 
                   <div id="grid-item3">
-                    <Chart indice={indice} />
+                    <Chart indice={Array.from(deviceIds)[indice - 1] || 1} />
                   </div>
 
                   <div id="grid-item1">
-                    <Snr indice={indice} />
+                    <Snr indice={Array.from(deviceIds)[indice - 1] || 1} />
                   </div>
 
                   <div id="grid-item2">
                     <h4>Raw Telemetery</h4>
-                    <Raw indice={indice} />
+                    <Raw indice={Array.from(deviceIds)[indice - 1] || 1} />
                   </div>
 
                   <div id="grid-item4">
-                    <Trubidite indice={indice} />
+                    <Trubidite
+                      indice={Array.from(deviceIds)[indice - 1] || 1}
+                    />
                     <h4>Turbidity</h4>
                   </div>
                 </div>
@@ -115,7 +142,11 @@ function App() {
               </Route>
               <Route path="/history">
                 <Bar indice={indice} handleChange={handleChange} />
-                <History indice={indice} handleChange={handleChange} />
+                <History allData={allData} />
+              </Route>
+              <Route path="/devices">
+                <Bar indice={indice} handleChange={handleChange} />
+                <DeviceTable />
               </Route>
             </Switch>
           </>
