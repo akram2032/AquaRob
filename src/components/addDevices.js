@@ -14,7 +14,6 @@ const DeviceTable = () => {
   const [showTable, setShowTable] = useState(true);
   const [isLoading, setIsloading] = useState(false);
   const [isAddBtn, setIsAddBtn] = useState(true);
-  let i = 0;
   const handleCancel = (deviceId) => {
     setShowAdd(false);
     setShowTable(true);
@@ -98,7 +97,7 @@ const DeviceTable = () => {
             <table>
               <thead>
                 <tr>
-                  <th>N</th>
+                  <th>Device ID</th>
                   <th>Country</th>
                   <th>State</th>
                   <th>City</th>
@@ -107,7 +106,6 @@ const DeviceTable = () => {
               </thead>
               <tbody>
                 {devices.map((device) => {
-                  i++;
                   return (
                     <tr key={device.device_id}>
                       <td>{device.device_id}</td>

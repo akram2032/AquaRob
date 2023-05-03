@@ -113,7 +113,7 @@ function App() {
                   total={total}
                 />
                 <div className="component-map">
-                  <Map indice={indice} />
+                  <Map indice={Array.from(deviceIds)[indice - 1] || 1} />
                 </div>
               </Route>
               <Route path="/temperature">
@@ -123,7 +123,7 @@ function App() {
                   total={total}
                 />
                 <div className="component">
-                  <Chart indice={indice} />
+                  <Chart indice={Array.from(deviceIds)[indice - 1] || 1} />
                 </div>
               </Route>
               <Route path="/rssisnr">
@@ -133,7 +133,7 @@ function App() {
                   total={total}
                 />
                 <div className="component">
-                  <Snr indice={indice} />
+                  <Snr indice={Array.from(deviceIds)[indice - 1] || 1} />
                 </div>
               </Route>
               <Route path="/cp">
