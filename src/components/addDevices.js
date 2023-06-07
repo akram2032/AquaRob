@@ -171,8 +171,8 @@ const DeviceTable = () => {
             id="city"
             type="text"
             placeholder="City"
-            onChange={(e) => setCity(e.target.value)}
             value={city}
+            onChange={(e) => setCity(e.target.value)}
           ></input>
           <div className="deviceBtnDiv">
             <button

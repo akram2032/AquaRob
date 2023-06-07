@@ -8,6 +8,13 @@ const Map = ({ indice }) => {
   const [position, setPosition] = useState([36.6586, 2.9233]);
   const [temp, setTemp] = useState([0]);
   const [profondeur, setProfondeur] = useState([0]);
+  const [longetude, setlongetude] = useState([0]);
+  const [latitude, setLatiude] = useState([0]);
+  const [rssi, setRssi] = useState([0]);
+  const [snr, setsnr] = useState([0]);
+  const [turbidity, setTurbidity] = useState([0]);
+
+
   //const position = [36.8, 3.1];
 
   useEffect(() => {
@@ -17,11 +24,17 @@ const Map = ({ indice }) => {
       const { data } = json;
       const filtredData = data.filter((obj) => obj.device_id === indice);
       const donnees = filtredData.pop();
-      const { temperature, device_id, latitude, longetude, altitude } = donnees;
+      const { temperature, device_id, latitude, longetude, altitude, snr, rssi, turbidite } = donnees;
+      console.log(donnees)
       setTemp(temperature);
       setDeviceID(device_id);
       setPosition([longetude, latitude]);
       setProfondeur(altitude);
+      setLatiude(latitude)
+      setlongetude(longetude)
+      setRssi(rssi)
+      setsnr(snr)
+      setTurbidity(turbidite)
     };
     donnees();
   }, [indice]);
@@ -39,10 +52,19 @@ const Map = ({ indice }) => {
           <Popup>
             Device ID: {deviceId}
             <br />
-            Tempertaure : {temp} C
+            Longitude : {longetude}
             <br />
-            Profondeur : {profondeur} m
+            Latitude : {latitude}
             <br />
+            Altitude : {profondeur} m
+            <br />
+            RSSI : {rssi} Dbm
+            <br />
+            SNR : {snr} Db
+            <br />
+            Temperature : {temp} C
+            <br/>
+            Turbidity : {turbidity} %
           </Popup>
         </Marker>
       </MapContainer>

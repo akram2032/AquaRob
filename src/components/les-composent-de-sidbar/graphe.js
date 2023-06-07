@@ -31,30 +31,29 @@ const Graph = () => {
       </ListItem>
 
       <List component="div" disablePadding>
+        <Link to="/temperature" className="links">
         <ListItemButton sx={{ pl: 4 }}>
           <ListItemIcon>
             <ThermostatIcon sx={{ color: "#191970" }} />
           </ListItemIcon>
-          <Link to="/temperature" className="links">
             <Titrelist>
               {" "}
               <ListItemText primary="temperature" />
             </Titrelist>
-          </Link>
         </ListItemButton>
+        </Link>
       </List>
       <List component="div" disablePadding>
+        <Link to="/rssisnr" className="links">
         <ListItemButton sx={{ pl: 4 }}>
           <ListItemIcon>
             <RadarIcon sx={{ color: "#191970" }} />
           </ListItemIcon>
-          <Link to="/rssisnr" className="links">
             <Titrelist>
-              {" "}
               <ListItemText primary="Rssi" />
             </Titrelist>
-          </Link>
         </ListItemButton>
+        </Link>
       </List>
     </List>
   );

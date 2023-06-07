@@ -12,6 +12,7 @@ import HistoryIcon from "@mui/icons-material/History";
 const History = () => {
   return (
     <List>
+      <Link className="links" to="/history">
       <ListItemButton>
         <ListItemIcon>
           <HistoryIcon sx={{ color: "#191970" }} />
@@ -19,13 +20,11 @@ const History = () => {
         <Typography varient="h6" mr={2} color="#191970">
           {" "}
           <ListItemText>
-            {" "}
-            <Link className="links" to="/history">
               History
-            </Link>{" "}
           </ListItemText>
         </Typography>
       </ListItemButton>
+      </Link>
     </List>
   );
 };

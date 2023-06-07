@@ -30,17 +30,16 @@ const Map = () => {
       </ListItem>
 
       <List component="div" disablePadding>
+        <Link to="/map" className="links">
         <ListItemButton sx={{ pl: 4 }}>
           <ListItemIcon>
             <RoomIcon sx={{ color: "#191970" }} />
           </ListItemIcon>
-          <Link to="/map" className="links">
             <Titrelist>
-              {" "}
               <ListItemText primary="gps" />
             </Titrelist>
-          </Link>
         </ListItemButton>
+        </Link>
       </List>
 
       <Divider />

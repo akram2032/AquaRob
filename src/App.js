@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import "./App.css";
 import Map from "./components/map";
@@ -13,11 +13,11 @@ import ChangePass from "./components/cp";
 import History from "./components/history";
 import DeviceTable from "./components/addDevices";
 import ScrollBtn from "./components/Scrollbtn";
-import {API_URL} from "./components/config";
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import { API_URL } from "./components/config";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 function App() {
-  const [sessionKey, setSessionKey] = useState(true);
+  const [sessionKey, setSessionKey] = useState(false);
   const [userPassword, setUserPassword] = useState("");
   const [indice, setIndice] = useState(1);
   // total device that sent a message
@@ -41,9 +41,9 @@ function App() {
       const respDevice = await device.json();
       const setDevice = await setDevices(respDevice.data);
       const json = await response.json();
-      const {data} = json;
+      const { data } = json;
       const set = await setDeviceIds(
-          new Set(data.map((item) => item.device_id))
+        new Set(data.map((item) => item.device_id))
       );
       setAllData(data);
       // setup a cookie that contains all the data
@@ -59,111 +59,111 @@ function App() {
     });
   }, [deviceIds]);
   return (
-      <>
-        {(document.body.style.zoom = 1.0)}
-        <Router>
-          <Route exact path="/">
-            <RawBar/>
-            <Logging
-                setSessionKey={setSessionKey}
-                setUserPassword={setUserPassword}
-            />
-          </Route>
-          {sessionKey && (
-              <>
-                <Switch>
-                  <Route path="/home">
-                    <Bar
-                        setSessionKey={setSessionKey}
-                        handleChange={handleChange}
-                        indice={indice}
-                        total={total}
-                    />
-                    <div className="grid-container">
-                      <div className="map1" id="grid-item5">
-                        <Map indice={Array.from(deviceIds)[indice - 1] || 1}/>
-                      </div>
+    <>
+      {(document.body.style.zoom = 1.0)}
+      <Router>
+        <Route exact path="/">
+          <RawBar />
+          <Logging
+            setSessionKey={setSessionKey}
+            setUserPassword={setUserPassword}
+          />
+        </Route>
+        {sessionKey && (
+          <>
+            <Switch>
+              <Route path="/home">
+                <Bar
+                  setSessionKey={setSessionKey}
+                  handleChange={handleChange}
+                  indice={indice}
+                  total={total}
+                />
+                <div className="grid-container">
+                  <div className="map1" id="grid-item5">
+                    <Map indice={Array.from(deviceIds)[indice - 1] || 1} />
+                  </div>
 
-                      <div id="grid-item3">
-                        <Chart indice={Array.from(deviceIds)[indice - 1] || 1}/>
-                      </div>
+                  <div id="grid-item3">
+                    <Chart indice={Array.from(deviceIds)[indice - 1] || 1} />
+                  </div>
 
-                      <div id="grid-item1">
-                        <Snr indice={Array.from(deviceIds)[indice - 1] || 1}/>
-                      </div>
+                  <div id="grid-item1">
+                    <Snr indice={Array.from(deviceIds)[indice - 1] || 1} />
+                  </div>
 
-                      <div id="grid-item2">
-                        <h4>Raw Telemetery</h4>
-                        <Raw indice={Array.from(deviceIds)[indice - 1] || 1}/>
-                      </div>
+                  <div id="grid-item2">
+                    <h4>Real Time Data</h4>
+                    <Raw indice={Array.from(deviceIds)[indice - 1] || 1} />
+                  </div>
 
-                      <div id="grid-item4">
-                        <Trubidite
-                            indice={Array.from(deviceIds)[indice - 1] || 1}
-                        />
-                        <h4>Turbidity</h4>
-                      </div>
-                    </div>
-                    <ScrollBtn/>
-                  </Route>
-                  <Route path="/map">
-                    <Bar
-                        setSessionKey={setSessionKey}
-                        indice={indice}
-                        handleChange={handleChange}
-                        total={total}
+                  <div id="grid-item4">
+                    <Trubidite
+                      indice={Array.from(deviceIds)[indice - 1] || 1}
                     />
-                    <div className="component-map">
-                      <Map indice={Array.from(deviceIds)[indice - 1] || 1}/>
-                    </div>
-                  </Route>
-                  <Route path="/temperature">
-                    <Bar
-                        setSessionKey={setSessionKey}
-                        indice={indice}
-                        handleChange={handleChange}
-                        total={total}
-                    />
-                    <div className="component">
-                      <Chart indice={Array.from(deviceIds)[indice - 1] || 1}/>
-                    </div>
-                  </Route>
-                  <Route path="/rssisnr">
-                    <Bar
-                        setSessionKey={setSessionKey}
-                        indice={indice}
-                        handleChange={handleChange}
-                        total={total}
-                    />
-                    <div className="component">
-                      <Snr indice={Array.from(deviceIds)[indice - 1] || 1}/>
-                    </div>
-                  </Route>
-                  <Route path="/cp">
-                    <Bar/>
-                    <ChangePass oldpass={userPassword}/>
-                  </Route>
-                  <Route path="/history">
-                    <Bar
-                        setSessionKey={setSessionKey}
-                        indice={indice}
-                        handleChange={handleChange}
-                    />
-                    <History allData={allData}/>
-                  </Route>
-                  <Route path="/devices">
-                    <Bar
-                        setSessionKey={setSessionKey}
-                        indice={indice}
-                        handleChange={handleChange}
-                    />
-                    <DeviceTable/>
-                  </Route>
-                </Switch>
-              </>
-          )}
-        </Router>
-      </>
+                    <h4>Turbidity</h4>
+                  </div>
+                </div>
+                <ScrollBtn />
+              </Route>
+              <Route path="/map">
+                <Bar
+                  setSessionKey={setSessionKey}
+                  indice={indice}
+                  handleChange={handleChange}
+                  total={total}
+                />
+                <div className="component-map">
+                  <Map indice={Array.from(deviceIds)[indice - 1] || 1} />
+                </div>
+              </Route>
+              <Route path="/temperature">
+                <Bar
+                  setSessionKey={setSessionKey}
+                  indice={indice}
+                  handleChange={handleChange}
+                  total={total}
+                />
+                <div className="component">
+                  <Chart indice={Array.from(deviceIds)[indice - 1] || 1} />
+                </div>
+              </Route>
+              <Route path="/rssisnr">
+                <Bar
+                  setSessionKey={setSessionKey}
+                  indice={indice}
+                  handleChange={handleChange}
+                  total={total}
+                />
+                <div className="component">
+                  <Snr indice={Array.from(deviceIds)[indice - 1] || 1} />
+                </div>
+              </Route>
+              <Route path="/cp">
+                <Bar />
+                <ChangePass oldpass={userPassword} />
+              </Route>
+              <Route path="/history">
+                <Bar
+                  setSessionKey={setSessionKey}
+                  indice={indice}
+                  handleChange={handleChange}
+                />
+                <History allData={allData} />
+              </Route>
+              <Route path="/devices">
+                <Bar
+                  setSessionKey={setSessionKey}
+                  indice={indice}
+                  handleChange={handleChange}
+                />
+                <DeviceTable />
+              </Route>
+            </Switch>
+          </>
+        )}
+      </Router>
+    </>
   );
 }
 

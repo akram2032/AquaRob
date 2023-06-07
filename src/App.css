@@ -295,6 +295,7 @@ td {
 }
 .historyOptions button {
   margin-left: 1rem;
+  margin-top: -10rem;
 }
 .historyOptions form {
   margin: 0rem;
