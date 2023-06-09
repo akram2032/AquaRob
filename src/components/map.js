@@ -14,7 +14,6 @@ const Map = ({ indice }) => {
   const [snr, setsnr] = useState([0]);
   const [turbidity, setTurbidity] = useState([0]);
 
-
   //const position = [36.8, 3.1];
 
   useEffect(() => {
@@ -24,6 +23,7 @@ const Map = ({ indice }) => {
       const { data } = json;
       const filtredData = data.filter((obj) => obj.device_id === indice);
       const donnees = filtredData.pop();
+<<<<<<< Updated upstream
       const { temperature, device_id, latitude, longitude, altitude, snr, rssi, turbidite } = donnees;
       setTemp(temperature);
       setDeviceID(device_id);
@@ -34,6 +34,28 @@ const Map = ({ indice }) => {
       setRssi(rssi)
       setsnr(snr)
       setTurbidity(turbidite)
+=======
+      const {
+        temperature,
+        device_id,
+        latitude,
+        longetude,
+        altitude,
+        snr,
+        rssi,
+        turbidite,
+      } = donnees;
+      console.log(donnees);
+      setTemp(temperature);
+      setDeviceID(device_id);
+      setPosition([latitude, longetude]);
+      setProfondeur(altitude);
+      setLatiude(latitude);
+      setlongetude(longetude);
+      setRssi(rssi);
+      setsnr(snr);
+      setTurbidity(turbidite);
+>>>>>>> Stashed changes
     };
     donnees();
   }, [indice]);
@@ -62,7 +84,7 @@ const Map = ({ indice }) => {
             SNR : {snr} Db
             <br />
             Temperature : {temp} C
-            <br/>
+            <br />
             Turbidity : {turbidity} %
           </Popup>
         </Marker>
