@@ -24,18 +24,13 @@ const Map = ({ indice }) => {
       const { data } = json;
       const filtredData = data.filter((obj) => obj.device_id === indice);
       const donnees = filtredData.pop();
-<<<<<<< Updated upstream
-      const { temperature, device_id, latitude, longetude, altitude, snr, rssi, turbidite } = donnees;
-=======
-      const { temperature, device_id, latitude, longitude, altitude } = donnees;
->>>>>>> Stashed changes
-      console.log(donnees)
+      const { temperature, device_id, latitude, longitude, altitude, snr, rssi, turbidite } = donnees;
       setTemp(temperature);
       setDeviceID(device_id);
       setPosition([longitude, latitude]);
       setProfondeur(altitude);
       setLatiude(latitude)
-      setlongetude(longetude)
+      setlongetude(longitude)
       setRssi(rssi)
       setsnr(snr)
       setTurbidity(turbidite)
