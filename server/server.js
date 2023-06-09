@@ -20,7 +20,7 @@ app.get("/api/fetchTemp/:id/:deviceID", (req, res) => {
         case "1":
             // get the temp of the current day by interval of 1 hour
             sql = `SELECT device_Id, HOUR (time) as hour, AVG (temperature) as temperature
-                   FROM aquaRob2
+                   FROM messages
                    WHERE date = DATE (now()) and device_id = ${deviceID}
                    GROUP BY HOUR (time);`;
             var temperature = new Array(24).fill(0);
@@ -29,7 +29,7 @@ app.get("/api/fetchTemp/:id/:deviceID", (req, res) => {
         case "2":
             // get the avg temp on each day of the current week
             sql = `SELECT device_Id, DAYOFWEEK(date) AS day, AVG(temperature) AS temperature
-                   FROM aquaRob2
+                   FROM messages
                    WHERE YEARWEEK(date) = YEARWEEK(NOW()) and device_id = ${deviceID}
                    GROUP BY DAYOFWEEK(date)
                    ORDER BY DAYOFWEEK(date);`;
@@ -38,7 +38,7 @@ app.get("/api/fetchTemp/:id/:deviceID", (req, res) => {
             break;
         case "3":
             sql = `SELECT device_Id, FLOOR((DAY(date) - 1) / 7) + 1 as week_number, AVG(temperature) as temperature
-                   FROM aquaRob2
+                   FROM messages
                    WHERE MONTH (date) = MONTH (CURDATE()) and device_id = ${deviceID}
                    GROUP BY week_number
                    HAVING week_number BETWEEN 1 AND 4`;
@@ -48,7 +48,7 @@ app.get("/api/fetchTemp/:id/:deviceID", (req, res) => {
         // year case
         case "4":
             sql = `SELECT device_Id, DATE_FORMAT(date, '%m') as month, AVG(temperature) as temperature
-                   FROM aquaRob2
+                   FROM messages
                    WHERE YEAR (date) = YEAR (CURDATE()) and device_id = ${deviceID}
                    GROUP BY month`;
             var temperature = new Array(12).fill(0);
@@ -112,7 +112,7 @@ app.get("/api/fetchRssi/:id/:deviceID", (req, res) => {
         case "1":
             // get the rssi of the current day by interval of 1 hour
             sql = `SELECT device_id, HOUR (time) as hour, AVG (rssi) as rssi
-                   FROM aquaRob2
+                   FROM messages
                    WHERE date = DATE (now()) and device_id = ${deviceID}
                    GROUP BY HOUR (time)`;
             var rssi = new Array(24).fill(0);
@@ -121,7 +121,7 @@ app.get("/api/fetchRssi/:id/:deviceID", (req, res) => {
         case "2":
             // get the avg rssi on each day of the current week
             sql = `SELECT device_id, DAYOFWEEK(date) AS day, AVG(rssi) AS rssi
-                   FROM aquaRob2
+                   FROM messages
                    WHERE YEARWEEK(date) = YEARWEEK(NOW()) and device_id = ${deviceID}
                    GROUP BY DAYOFWEEK(date)
                    ORDER BY DAYOFWEEK(date);`;
@@ -130,7 +130,7 @@ app.get("/api/fetchRssi/:id/:deviceID", (req, res) => {
             break;
         case "3":
             sql = `SELECT device_id, FLOOR((DAY(date) - 1) / 7) + 1 as week_number, AVG(rssi) as rssi
-                   FROM aquaRob2
+                   FROM messages
                    WHERE MONTH (date) = MONTH (CURDATE()) and device_id = ${deviceID}
                    GROUP BY week_number
                    HAVING week_number BETWEEN 1 AND 4`;
@@ -140,7 +140,7 @@ app.get("/api/fetchRssi/:id/:deviceID", (req, res) => {
         // year case
         case "4":
             sql = `SELECT device_id, DATE_FORMAT(date, '%m') as month, AVG(rssi) as rssi
-                   FROM aquaRob2
+                   FROM messages
                    WHERE YEAR (date) = YEAR (CURDATE()) and device_id = ${deviceID}
                    GROUP BY month`;
             var rssi = new Array(12).fill(0);
@@ -204,7 +204,7 @@ app.get("/api/fetchSnr/:id/:deviceID", (req, res) => {
         case "1":
             // get the snr of the current day by interval of 1 hour
             sql = `SELECT device_id, HOUR (time) as hour, AVG (snr) as snr
-                   FROM aquaRob2
+                   FROM messages
                    WHERE date = DATE (now()) and device_id = ${deviceID}
                    GROUP BY HOUR (time)`;
             snr = new Array(24).fill(0);
@@ -213,7 +213,7 @@ app.get("/api/fetchSnr/:id/:deviceID", (req, res) => {
         case "2":
             // get the avg snr on each day of the current week
             sql = `SELECT device_id, DAYOFWEEK(date) AS day, AVG(snr) AS snr
-                   FROM aquaRob2
+                   FROM messages
                    WHERE YEARWEEK(date) = YEARWEEK(NOW()) and device_id = ${deviceID}
                    GROUP BY DAYOFWEEK(date)
                    ORDER BY DAYOFWEEK(date);`;
@@ -222,7 +222,7 @@ app.get("/api/fetchSnr/:id/:deviceID", (req, res) => {
             break;
         case "3":
             sql = `SELECT device_id, FLOOR((DAY(date) - 1) / 7) + 1 as week_number, AVG(snr) as snr
-                   FROM aquaRob2
+                   FROM messages
                    WHERE MONTH (date) = MONTH (CURDATE()) and device_id = ${deviceID}
                    GROUP BY week_number
                    HAVING week_number BETWEEN 1 AND 4`;
@@ -232,7 +232,7 @@ app.get("/api/fetchSnr/:id/:deviceID", (req, res) => {
         // year case
         case "4":
             sql = `SELECT device_id, DATE_FORMAT(date, '%m') as month, AVG(snr) as snr
-                   FROM aquaRob2
+                   FROM messages
                    WHERE YEAR (date) = YEAR (CURDATE()) and device_id = ${deviceID}
                    GROUP BY month`;
             snr = new Array(12).fill(0);
@@ -290,7 +290,7 @@ app.get("/api/fetchSnr/:id/:deviceID", (req, res) => {
 });
 
 app.get("/api/fetchAll", (req, res) => {
-    const query = "Select * from aquaRob2";
+    const query = "Select * from messages";
     const Data = new Promise((resolve, rejects) => {
         connection.query(query, (err, result) => {
             if (err) rejects(err);
