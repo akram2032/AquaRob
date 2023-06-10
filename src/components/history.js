@@ -64,6 +64,7 @@ const History = () => {
                     <th>Longitude</th>
                     <th>Latitude</th>
                     <th>Altitude</th>
+                    <th>Depth</th>
                     <th>Turbidite</th>
                     <th>RSSI</th>
                     <th>SNR</th>
@@ -78,10 +79,11 @@ const History = () => {
                           <td>{obj.date.slice(0, 10)}</td>
                           <td>{obj.time}</td>
                           <td>{obj.temperature}</td>
-                          <td>{obj.longetude}</td>
+                          <td>{obj.longitude}</td>
                           <td>{obj.latitude}</td>
                           <td>{obj.altitude}</td>
-                          <td>{obj.turbidite}</td>
+                          <td>{obj.depth}</td>
+                          <td>{obj.turbidity}</td>
                           <td>{obj.rssi}</td>
                           <td>{obj.snr}</td>
                         </tr>

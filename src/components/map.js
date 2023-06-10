@@ -7,7 +7,8 @@ const Map = ({ indice }) => {
   const [deviceId, setDeviceID] = useState(1);
   const [position, setPosition] = useState([36.6586, 2.9233]);
   const [temp, setTemp] = useState([0]);
-  const [profondeur, setProfondeur] = useState([0]);
+  const [altitude, setAltitude] = useState([0]);
+  const [depth, setDepth] = useState([0]);
   const [longetude, setlongetude] = useState([0]);
   const [latitude, setLatiude] = useState([0]);
   const [rssi, setRssi] = useState([0]);
@@ -24,16 +25,17 @@ const Map = ({ indice }) => {
       const { data } = json;
       const filtredData = data.filter((obj) => obj.device_id === indice);
       const donnees = filtredData.pop();
-      const { temperature, device_id, latitude, longitude, altitude, snr, rssi, turbidite } = donnees;
+      const { temperature, device_id, latitude, longitude, altitude, snr, rssi, turbidity, depth } = donnees;
       setTemp(temperature);
       setDeviceID(device_id);
       setPosition([longitude, latitude]);
-      setProfondeur(altitude);
+      setAltitude(altitude);
+      setDepth(depth);
       setLatiude(latitude)
       setlongetude(longitude)
       setRssi(rssi)
       setsnr(snr)
-      setTurbidity(turbidite)
+      setTurbidity(turbidity)
     };
     donnees();
   }, [indice]);
@@ -55,7 +57,9 @@ const Map = ({ indice }) => {
             <br />
             Latitude : {latitude}
             <br />
-            Altitude : {profondeur} m
+            Altitude : {altitude} m
+            <br />
+            Depth : {depth} m
             <br />
             RSSI : {rssi} Dbm
             <br />

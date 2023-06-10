@@ -14,7 +14,7 @@ const Trubidite = ({indice}) => {
       const { data } = json;
       const filtredData = data.filter(obj => obj.device_id === indice)
       const turbi = filtredData.pop();
-      setTurbidite(turbi.turbidite);
+      setTurbidite(turbi.turbidity);
       setIsData(true);
     };
       fetch_()

@@ -41,7 +41,7 @@ const Raw = ({ indice }) => {
           </tr>
           <tr>
             <td>Turbidity</td>
-            <td>{data.turbidite} %</td>
+            <td>{data.turbidity} %</td>
           </tr>
         </tbody>
       </table>

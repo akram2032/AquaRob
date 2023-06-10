@@ -17,7 +17,7 @@ import { API_URL } from "./components/config";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 function App() {
-  const [sessionKey, setSessionKey] = useState(false);
+  const [sessionKey, setSessionKey] = useState(true);
   const [userPassword, setUserPassword] = useState("");
   const [indice, setIndice] = useState(1);
   // total device that sent a message
