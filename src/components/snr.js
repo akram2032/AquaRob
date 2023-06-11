@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { API_URL } from "./config";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -83,8 +82,8 @@ export default function Snr({ indice }) {
     setLastClicked(e.target);
   };
   const fetchData = async (x) => {
-    const urlSnr = `${API_URL}/api/fetchSnr/${x}/${indice}`;
-    const urlRssi = `${API_URL}/api/fetchRssi/${x}/${indice}`;
+    const urlSnr = `/api/fetchSnr/${x}/${indice}`;
+    const urlRssi = `/api/fetchRssi/${x}/${indice}`;
     const dataSnr = await fetch(urlSnr);
     const dataRssi = await fetch(urlRssi);
     const data_Snr_Json = await dataSnr.json();

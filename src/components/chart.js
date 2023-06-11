@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { API_URL } from "./config";
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -53,7 +52,7 @@ function Chart({ indice }) {
   };
   const fetchData = async (x) => {
     //const url = "http://localhost:8000/api/fetchTemp/" + x;
-    const data = await fetch(`${API_URL}/api/fetchTemp/${x}/${indice}`);
+    const data = await fetch(`/api/fetchTemp/${x}/${indice}`);
     const dataJson = await data.json();
     setDataTemp(dataJson.data);
   };

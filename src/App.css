@@ -63,6 +63,7 @@ h4 {
 .grid-container {
   max-width: 1480px;
   margin: 8rem auto;
+  margin-right:2.5rem;
   display: grid;
   align-items: center;
   grid-template-columns: repeat(3, 1fr);

@@ -3,7 +3,6 @@ import React, { useState, useEffect, useRef } from "react";
 import { exportToCSV } from "../functions/exportTocsv";
 import DownloadIcon from "@mui/icons-material/Download";
 import ScrollBtn from "./Scrollbtn";
-import { API_URL } from "./config";
 
 const History = () => {
   const [allData, SetAllData] = useState();
@@ -37,7 +36,7 @@ const History = () => {
   };
   useEffect(() => {
     const fetch_ = async () => {
-      const response = await fetch(`${API_URL}/api/fetchAll`);
+      const response = await fetch(`/api/fetchAll`);
       const json = await response.json();
       const { data } = json;
       const set = await SetAllData(data);
@@ -60,11 +59,11 @@ const History = () => {
                     <th>Device Id</th>
                     <th>Date</th>
                     <th>Time</th>
-                    <th>Temperature</th>
                     <th>Longitude</th>
                     <th>Latitude</th>
                     <th>Altitude</th>
                     <th>Depth</th>
+                    <th>Temperature</th>
                     <th>Turbidite</th>
                     <th>RSSI</th>
                     <th>SNR</th>
@@ -78,11 +77,11 @@ const History = () => {
                           <td>{obj.device_id}</td>
                           <td>{obj.date.slice(0, 10)}</td>
                           <td>{obj.time}</td>
-                          <td>{obj.temperature}</td>
-                          <td>{obj.longitude}</td>
-                          <td>{obj.latitude}</td>
+                          <td>{parseFloat(obj.longitude).toFixed(3)}</td>
+                          <td>{parseFloat(obj.latitude).toFixed(3)}</td>
                           <td>{obj.altitude}</td>
                           <td>{obj.depth}</td>
+                          <td>{obj.temperature}</td>
                           <td>{obj.turbidity}</td>
                           <td>{obj.rssi}</td>
                           <td>{obj.snr}</td>

@@ -5,7 +5,6 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import LockIcon from "@mui/icons-material/Lock";
 import { useHistory } from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import { API_URL } from "./config";
 
 export default function Logging({ setSessionKey, setUserPassword }) {
   const history = useHistory();
@@ -18,7 +17,7 @@ export default function Logging({ setSessionKey, setUserPassword }) {
     if (username && password) {
       setIsloading(true);
       const validate = async () => {
-        const url = `${API_URL}/api/fetchUsers/?username=${username}&password=${password}`;
+        const url = `/api/fetchUsers/?username=${username}&password=${password}`;
         const checkUser = await fetch(url);
         const dataToJson = await checkUser.json();
         const { success } = dataToJson;

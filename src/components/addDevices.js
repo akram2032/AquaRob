@@ -24,7 +24,7 @@ const DeviceTable = () => {
       setIsloading(true);
       if (
         fetch(
-          `${API_URL}/api/addDevice/?opt=0&country=${country}&state=${state}&city=${city}`
+          `/api/addDevice/?opt=0&country=${country}&state=${state}&city=${city}`
         )
       ) {
         setChanged(true);
@@ -33,14 +33,14 @@ const DeviceTable = () => {
         setIsloading(false);
       }
     } else if (x === 0 && idToDel) {
-      fetch(`${API_URL}/api/addDevice/?opt=1&id=${idToDel}`);
+      fetch(`/api/addDevice/?opt=1&id=${idToDel}`);
       setChanged(true);
       setIsAddBtn(true);
     }
   };
   useEffect(() => {
     const fetch_ = async () => {
-      const response = await fetch(`${API_URL}/api/fetchDevices`);
+      const response = await fetch(`/api/fetchDevices`);
       const json = await response.json();
       const { data } = json;
       const set = await setData_(data);

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { API_URL } from "./config";
 import L from "leaflet";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import "leaflet-control-geocoder/dist/Control.Geocoder.css";
@@ -9,7 +8,7 @@ const Map = ({ indice }) => {
   const [temp, setTemp] = useState([0]);
   const [altitude, setAltitude] = useState([0]);
   const [depth, setDepth] = useState([0]);
-  const [longetude, setlongetude] = useState([0]);
+  const [longitude, setlongitude] = useState([0]);
   const [latitude, setLatiude] = useState([0]);
   const [rssi, setRssi] = useState([0]);
   const [snr, setsnr] = useState([0]);
@@ -20,7 +19,7 @@ const Map = ({ indice }) => {
 
   useEffect(() => {
     const donnees = async () => {
-      const response = await fetch(`${API_URL}/api/fetchAll/`);
+      const response = await fetch(`/api/fetchAll/`);
       const json = await response.json();
       const { data } = json;
       const filtredData = data.filter((obj) => obj.device_id === indice);
@@ -28,11 +27,11 @@ const Map = ({ indice }) => {
       const { temperature, device_id, latitude, longitude, altitude, snr, rssi, turbidity, depth } = donnees;
       setTemp(temperature);
       setDeviceID(device_id);
-      setPosition([longitude, latitude]);
+      setPosition([longitude,latitude]);
       setAltitude(altitude);
       setDepth(depth);
       setLatiude(latitude)
-      setlongetude(longitude)
+      setlongitude(longitude)
       setRssi(rssi)
       setsnr(snr)
       setTurbidity(turbidity)
@@ -53,7 +52,7 @@ const Map = ({ indice }) => {
           <Popup>
             Device ID: {deviceId}
             <br />
-            Longitude : {longetude}
+            Longitude : {longitude}
             <br />
             Latitude : {latitude}
             <br />

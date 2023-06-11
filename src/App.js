@@ -36,8 +36,8 @@ function App() {
   };
   useEffect(() => {
     const fetch_ = async () => {
-      const response = await fetch(`${API_URL}/api/fetchAll`);
-      const device = await fetch(`${API_URL}/api/fetchDevices`);
+      const response = await fetch(`/api/fetchAll`);
+      const device = await fetch(`/api/fetchDevices`);
       const respDevice = await device.json();
       const setDevice = await setDevices(respDevice.data);
       const json = await response.json();

@@ -1,16 +1,11 @@
 const express = require("express");
 const connection = require("./connect");
 const app = express();
-const corsOptions = {
-    origin: ["https://aquarob.netlify.app"],
-    credentials: true,
-};
 const cors = require("cors");
 
 app.use(cors({credentials: true}));
-
+app.use("/", cors());
 app.options("*", cors());
-//app.use("/", cors());
 
 // id 1 => current day, id 2 => current week, id 3 => current month, id 4 => current year
 let sql = "";
@@ -389,4 +384,5 @@ app.get("/api/addDevice/", (req, res) => {
     // });
 });
 
-app.listen(8000);
+app.listen(8000, ()=> {
+console.log("Server running on port 8000")});
