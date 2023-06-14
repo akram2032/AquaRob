@@ -23,28 +23,70 @@ const Raw = ({ indice }) => {
         <tbody>
           <tr>
             <td>Device ID</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
             <td>{indice}</td>
           </tr>
 
           <tr>
             <td>RSSI</td>
-            <td>{parseFloat(data.rssi).toFixed(0)} DBm</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+              {data.rssi ? parseFloat(data.rssi).toFixed(0) + "Dbm" : "-"}
+            </td>
           </tr>
           <tr>
             <td>SNR</td>
-            <td>{parseFloat(data.snr).toFixed(0)} Db</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>{data.snr ? parseFloat(data.snr).toFixed(0) + "Db" : "-"} </td>
           </tr>
           <tr>
             <td>Depth</td>
-            <td>{parseFloat(data.depth).toFixed(1)} M</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+              {data.depth ? parseFloat(data.depth).toFixed(1) + "M" : "-"}
+            </td>
           </tr>
           <tr>
             <td>Temperature</td>
-            <td>{parseFloat(data.temperature).toFixed(1)} C</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+              {data.temperature
+                ? parseFloat(data.temperature).toFixed(1) + "°C"
+                : "-"}{" "}
+            </td>
           </tr>
           <tr>
             <td>Turbidity</td>
-            <td>{parseFloat(data.turbidity).toFixed(1)} %</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+              {data.turbidity
+                ? parseFloat(data.turbidity).toFixed(1) + "%"
+                : "-"}
+            </td>
           </tr>
         </tbody>
       </table>

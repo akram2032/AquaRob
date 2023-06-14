@@ -61,7 +61,7 @@ h4 {
 
 /* Home page components styling*/
 .grid-container {
-  max-width: 1480px;
+  max-width: 1680px;
   margin: 8rem auto;
   display: grid;
   align-items: center;
@@ -99,7 +99,7 @@ h4 {
   grid-row: 1;
   grid-column: 3;
   height: auto;
-  margin-right: 7rem;
+  margin-right: 5rem;
 }
 h4 {
   margin-bottom: -0.01em;
@@ -107,7 +107,7 @@ h4 {
 #grid-item2 td,
 #grid-item2 tr {
   font-weight: 300;
-  padding: 0.25rem;
+  padding: 0rem;
   border: none;
 }
 #grid-item td:nth-child(odd) {
@@ -148,7 +148,7 @@ h4 {
   align-items: center;
   font-size: 1.5rem;
   height: auto;
-  margin-right: 7rem;
+  margin-right: 5rem;
   padding-bottom: 2rem;
   grid-column: 3;
   grid-row: 2;
@@ -173,28 +173,34 @@ h4 {
   grid-column: 1 / span 2;
   box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.3);
 }
-@media screen and (max-width: 360px) and (max-width: 480px) {
+@media screen and (max-width: 480px) {
   .container {
     grid-template-columns: repeat(1, 1fr);
     grid-template-rows: repeat(5, 1fr);
     column-gap: 0rem;
+    background-color: red;
     grid-row-gap: 0rem;
   }
   #grid-item1 {
+    display: none;
     grid-column: 1;
-    grid-row: 3;
-    margin: 0rem 1rem;
-    margin-bottom: 3rem;
+    grid-row: 4;
+    margin: -1rem 1rem;
     font-size: 1.5rem;
   }
   #grid-item2 {
     grid-column: 1;
     grid-row: 1;
-    margin: 0rem 1rem;
-    margin-bottom: 3rem;
+    margin: -1rem 1rem;
+    width: 80%;
+    font-size: 1.5rem;
+  }
+  #grid-item2 h4 {
     font-size: 2rem;
+    margin-bottom: 2rem;
   }
   #grid-item3 {
+    display: none;
     grid-column: 1;
     grid-row: 4;
     margin: 0rem 1rem;
@@ -205,14 +211,15 @@ h4 {
     grid-column: 1;
     grid-row: 2;
     margin: 0rem 1rem;
-    margin-bottom: 3rem;
+    width: 80%;
     font-size: 1.5rem;
   }
   #grid-item5 {
     grid-column: 1;
-    grid-row: 5;
+    grid-row: 3;
     margin: 0rem 1rem;
-    margin-bottom: 3rem;
+    width: 80%;
+    margin-bottom: 0rem;
     font-size: 1.5rem;
   }
 }
@@ -422,7 +429,6 @@ ul li {
 @media screen and (max-width: 600px) {
   #logo {
     display: none;
-    color: red;
   }
 }
 /* Logging Form */
