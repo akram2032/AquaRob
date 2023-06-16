@@ -13,7 +13,7 @@ Features
 
 ### Technologies Used
 
-- Front-end: React.js, HTML, CSS, JavaScript
+- Front-end: React.js, HTML, CSS, JavaScript, Mui, Leaflet, ChartJS
 - Back-end: Node.js, Express.js
 - Database: MySQL
 
