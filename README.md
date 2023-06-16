@@ -38,13 +38,13 @@ npm install
 
 bash
 
-cd Aquarob
-npm start
+    cd Aquarob
+    npm start
 
-cd Aquarob
-npm server
+    cd Aquarob
+    npm server
 
-    Access the web application on your browser at http://localhost:3000.
+Access the web application on your browser at http://localhost:3000.
 
 Contributing
 
