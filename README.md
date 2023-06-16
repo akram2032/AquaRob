@@ -15,9 +15,9 @@ Features
 
 ### Technologies Used
 
-Front-end: React.js, HTML, CSS, JavaScript
-Back-end: Node.js, Express.js
-Database: MySQL
+- Front-end: React.js, HTML, CSS, JavaScript
+- Back-end: Node.js, Express.js
+- Database: MySQL
 
 ### Installation
 
