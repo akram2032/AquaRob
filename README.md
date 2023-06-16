@@ -45,3 +45,12 @@ Contributions are welcome! If you'd like to contribute to this project, please f
 - Create a new branch.
 - Make your enhancements or bug fixes.
 - Submit a pull request.
+
+### Screenshots
+![PHOTO-2023-06-16-16-30-46](https://github.com/akram2032/AquaRob/assets/89083331/0b0fd12a-3041-474c-8d4c-e8a1f69f336e)
+![PHOTO-2023-06-16-16-30-47](https://github.com/akram2032/AquaRob/assets/89083331/e8c9c5d8-050c-4b84-a9b5-48c26fbc7fb0)
+![PHOTO-2023-06-16-16-30-48](https://github.com/akram2032/AquaRob/assets/89083331/a3a2198f-1b81-47ff-8f4d-a367c9785c4c)
+![image](https://github.com/akram2032/AquaRob/assets/89083331/dcbe8068-de26-4549-bb4a-b6d9fe44e1cf)
+
+
+
