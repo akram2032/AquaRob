@@ -1,4 +1,4 @@
-#IoT Data Visualization Web Application
+# IoT Data Visualization Web Application
 
 This web application is designed to fetch and display data collected over an IoT network. It utilizes a gateway, which is hosted on my GitHub profile, to connect to various IoT devices and retrieve the data. The application was implemented using React.js, Node.js, MySQL, and Express.js.
 Features
