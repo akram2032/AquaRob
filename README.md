@@ -9,8 +9,6 @@ Features
 
 - Data Filtering and Sorting: Users can easily filter and sort the data based on different parameters such as device ID, date, or specific data types.
 
-- Data Analytics: The application includes built-in data analytics capabilities, allowing users to generate insights, trends, and statistics from the collected data.
-
 - Secure Authentication: The web application ensures secure user authentication using industry-standard protocols and encryption techniques, ensuring the privacy and integrity of user data.
 
 ### Technologies Used
